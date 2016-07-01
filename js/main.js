@@ -12,6 +12,7 @@ var Game = new Phaser.Game(800, 600, Phaser.CANVAS, document.getElementById('gam
 // рисует прямоугольник, где gr - объект Graphics
 function drawRect(gr, x, y) {
 	
+	gr.lineStyle(1, 0xffffff, 1);
  /*   gr.moveTo(0, 0);  
     gr.lineTo(32, 0);
 	gr.lineTo(32, 32);
@@ -74,8 +75,10 @@ GameState.render = function() {
 
 GameState.update = function() {
 	graphics.clear();
+	drawRect(graphics, Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32);	
 	
 	if(Game.input.activePointer.isDown) { 
+		 console.log("Pointer down in", Math.floor(Game.input.x/32), "x",Math.floor(Game.input.y/32));
 	}
 }	
 
