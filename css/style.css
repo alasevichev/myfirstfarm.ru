@@ -43,7 +43,8 @@ header span {
 }
 
 .content .leftblock {
-	width: 132px;
+	width: 132px;	
+	min-height: 600px;
     border-radius: 5px;
     border: 1px dotted #ccc;
     padding: 5px;
@@ -53,10 +54,24 @@ header span {
 .content .leftblock	p{
 	text-align: center;
     font-size: 20px;
-	min-height: 600px;
+
 	 
 }
 
+.content .leftblock .item {
+	width:32px;
+	height:32px;
+	border: 1px solid #eee;
+}
+
+.content .leftblock .item:hover {
+	border: 1px solid black;	
+	
+}
+
+.content .leftblock .select {
+	box-shadow: 3px 2px 7px #aaa;
+}
 
 /* ИГРОВОЙ БЛОК */
 .content #game {

@@ -10,9 +10,9 @@ var Game = new Phaser.Game(800, 600, Phaser.CANVAS, document.getElementById('gam
 
 
 // рисует прямоугольник, где gr - объект Graphics
-function drawRect(gr, x, y) {
+function drawRect(gr, x, y, color) {
 	
-	gr.lineStyle(1, 0xffffff, 1);
+	gr.lineStyle(1, color, 1);
  /*   gr.moveTo(0, 0);  
     gr.lineTo(32, 0);
 	gr.lineTo(32, 32);
@@ -50,7 +50,12 @@ var GameState = {
 };	
   */ 
 var GameState = new Phaser.State();
+var map = new CMap(Game);
+
 var graphics; 
+
+
+var selected=0;
 
 GameState.preload = function() {
 	Game.load.image('palm', 'assets/palm.png');
@@ -59,9 +64,10 @@ GameState.preload = function() {
 }
 	
 GameState.create = function() {
-	for (x=0; x<20; x++)
+	/*for (x=0; x<20; x++)
 		for (y=0; y<20; y++)
-			Game.background = Game.add.sprite(x*32, y*32, 'grass', 6);
+			Game.background = Game.add.sprite(x*32, y*32, 'grass', 6);*/
+	map.renderMap();
 	// создаем объект графики для рисования
 	graphics = Game.add.graphics(0, 0);
 	
@@ -70,16 +76,26 @@ GameState.create = function() {
 }
 
 GameState.render = function() {
-
+	//map.renderMap();
 }	
 
 GameState.update = function() {
 	graphics.clear();
-	drawRect(graphics, Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32);	
 	
 	if(Game.input.activePointer.isDown) { 
-		 console.log("Pointer down in", Math.floor(Game.input.x/32), "x",Math.floor(Game.input.y/32));
+		 //console.log("Pointer down in", Math.floor(Game.input.x/32), "x",Math.floor(Game.input.y/32));
+		 send_server('log', 'Message for my server!');
+		 if (selected>0) {
+			map.map[Math.floor(Game.input.x/32)][Math.floor(Game.input.y/32)] = 6 - selected;
+			Game.background = Game.add.sprite(Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32, 'grass', 6-selected);
+		 }
 	}
+
+	if (Game.input.activePointer.withinGame) {
+		if (selected>0)drawRect(graphics, Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32, 0x00ff00);	
+			else drawRect(graphics, Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32, 0xffffff);	
+	}	
+
 }	
 
 

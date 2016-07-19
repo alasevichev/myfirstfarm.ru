@@ -28,7 +28,7 @@
 	</div>
 	<div class="leftblock">
 		<p>Меню:</p>
-		<div class="item" id="landing_1" style="background:url(assets\grass.png) no-repeat">Травка</div>
+		<div class="item" id="landing_1" style="background:url(assets/grass.png) 64px" title="цветок"></div>
 	</div>
 	<div id="game">
 	</div>
@@ -44,11 +44,20 @@
 <script src="js/phaser.min.js"></script>
 <script type="text/javascript" src="js/game.js"></script> 
 <script type="text/javascript" src="js/main.js"></script> 
+<script type="text/javascript" src="js/network.js"></script> 
 
 <script>
+	$(document).on('click', '.item', function() {
+		selected = selected==1?0:1;
+		
+		$(this).toggleClass('select', '');
+	
+	});
+
+
 	$(document).ready(function () {
 		
-		
+	
 	
 	});
 </script>
