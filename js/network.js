@@ -15,8 +15,11 @@ socket.onclose = function (e){
 
 // получение сообщения
 socket.onmessage = function (e){
+	
+	console.log(e);
+	
 	if (typeof e.data === "string"){
-		//var request = JSON.parse(e.data);
+		var request = JSON.parse(e.data);
 		
 		console.log(request);
 		
@@ -24,7 +27,7 @@ socket.onmessage = function (e){
 		//if (request.function)
 		//	Actions[request.function](request.args);
 		
-	};	
+	};
 }
 
 // функции

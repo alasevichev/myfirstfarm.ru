@@ -4,8 +4,8 @@
 @ini_set('set_time_limit',0);
 */
 
-$address 	= '0.0.0.0';
-$port 		= 8000;
+$address 	= 'localhost';
+$port 		= 9000;
 $usleep 	= 10000;
 $while 		= 1;
 $sID 		= 0;
@@ -39,6 +39,7 @@ if ($mainSocket !== FALSE) {
 		require (dirname(__FILE__).'/include/socket_accept.php');
 		
 		websocket_while();
+		
 		
         if (count($sock) > 0) {
 			//Обработка массива сессий

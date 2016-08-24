@@ -24,8 +24,8 @@ function websocket_onmessage($keyINsock, $str){
 	$args = $json->{'args'};
 
 	if (!isset($args)) $args = $keyINsock;
-	$arrOut = array('function' => 'log', 'args' => 'say:'.$args);
-	websock_send($keyINsock, $arrOut); //эхо;
+	$arrOut = json_encode(array('function' => 'log', 'args' => 'say:'.$args));
+	websock_send($keyINsock, $arrOut); 
 	//if (!empty($method)) $Users->$method($keyINsock, $args);
 }
 
@@ -43,11 +43,9 @@ function websocket_while(){
 	if(!isset($STDIN)){
 		$STDIN = fopen('php://stdin', 'r');
 	}
-	
-
-	stream_set_blocking ($STDIN, FALSE );
+	stream_set_blocking ($STDIN, TRUE );
 	$STDINline = trim(fgets($STDIN));
-	echo $STDINline;
+		
 	if(!empty($STDINline) && is_array($SESS) && count($SESS)>0){
 		foreach($SESS as $k => $v){
 			if($SESS[$k]['websock']){
