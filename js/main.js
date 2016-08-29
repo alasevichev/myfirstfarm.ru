@@ -1,4 +1,8 @@
 
+$(document).ready(function () {
+	$('#money').text(1000);
+});
+	
 //Создаем instance игры на весь экран с использованием Canvas
 
 var Game = new Phaser.Game(800, 600, Phaser.CANVAS, document.getElementById('game'));
@@ -51,6 +55,7 @@ var GameState = {
   */ 
 var GameState = new Phaser.State();
 var map = new CMap(Game);
+var player = new CPlayer;
 
 var graphics; 
 
@@ -60,6 +65,10 @@ var selected=0;
 GameState.preload = function() {
 	Game.load.image('palm', 'assets/palm.png');
 	Game.load.spritesheet('grass', 'assets/grass.png', 32, 32);	
+	
+	/* СТАРТОВЫЕ ПАРМЕТРЫ ИГРОКА */
+	player.setMoney(1000);
+	
 	
 }
 	
@@ -73,18 +82,32 @@ GameState.create = function() {
 	
 	drawRect(graphics, 0, 0);
 	
+	Game.input.onDown.add(pressMouse, Game);
 }
 
 GameState.render = function() {
 	//map.renderMap();
 }	
 
+
+// функци
+function pressMouse(pointer) {
+	var x = Math.floor(pointer.x/32);
+	var y = Math.floor(pointer.y/32);
+	send_server('set_item', {x:x, y:y, item:'100001'});
+}
+
+
 GameState.update = function() {
 	graphics.clear();
-	
 	if(Game.input.activePointer.isDown) { 
 		 //console.log("Pointer down in", Math.floor(Game.input.x/32), "x",Math.floor(Game.input.y/32));
-		 send_server('log', 'Message for my server!');
+		 var x = Math.floor(Game.input.x/32)*32;
+		 var y = Math.floor(Game.input.y/32)*32;
+		 
+		 //send_server('set_item', [x, y, '100001']);
+		 //send_server('set_item', {x:x, y:y, item:'100001'});
+		 
 		 if (selected>0) {
 			map.map[Math.floor(Game.input.x/32)][Math.floor(Game.input.y/32)] = 6 - selected;
 			Game.background = Game.add.sprite(Math.floor(Game.input.x/32)*32, Math.floor(Game.input.y/32)*32, 'grass', 6-selected);

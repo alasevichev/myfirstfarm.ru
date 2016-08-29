@@ -16,7 +16,7 @@ socket.onclose = function (e){
 // получение сообщения
 socket.onmessage = function (e){
 	
-	console.log(e);
+	//console.log(e); 
 	
 	if (typeof e.data === "string"){
 		var request = JSON.parse(e.data);
@@ -24,8 +24,8 @@ socket.onmessage = function (e){
 		console.log(request);
 		
 		// если функция, то вызываем соответствующую
-		//if (request.function)
-		//	Actions[request.function](request.args);
+		if (request.function)
+			Actions[request.function](request.args);
 		
 	};
 }
@@ -38,6 +38,10 @@ var Actions = {
 		log: function(str){
 			console.log(str);
 		},
+		fnSetItem: function(data){
+			$('#money').text(data.money);
+		},
+		
          
  }			
 

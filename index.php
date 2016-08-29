@@ -31,6 +31,7 @@ use Ratchet\Resource\ConnectionInterface;
 		<p class="myquote">Игра тестовая (прототип), пробная и не играбельная. Все, что можно, так это по тыкаться, ну и посоветовать что-нибудь дельное автору. :)</p>
 	</div>
 	<div class="leftblock">
+		<p><img src="assets/money.png" width="20px" style="float:left;"/><span id="money" style="line-height:1;"></span></p>
 		<p>Меню:</p>
 		<div class="item" id="landing_1" style="background:url(assets/grass.png) 64px" title="цветок"></div>
 	</div>

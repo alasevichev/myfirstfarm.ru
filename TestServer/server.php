@@ -6,12 +6,13 @@ if (empty($argv[1]) || !in_array($argv[1], array('start', 'stop', 'restart'))) {
 }
 
 $config = array(
-    'class' => 'ChatWebsocketDaemonHandler',
-    'pid' => '/tmp/websocket_chat.pid',
+    'class' => 'GameDaemonHandler',
+    'pid' => '/tmp/websocket_game_myfarm.pid',
     'websocket' => 'tcp://127.0.0.1:8000',
 );
 
-//require_once __DIR__ . '\vendor\autoload.php';
+
+
 require_once __DIR__ . '\core\Server.php';
 $WebsocketServer = new Server($config);
 

@@ -17,3 +17,22 @@ var CMap = function(game) {
 	
 }
 
+var CPlayer = function() {
+	this.money = 0; // деньги игрока
+	
+	this.setMoney = function (money) {
+		this.money = money;	
+		console.log(this.money); 		
+	}
+	
+	this.getMoney = function () {
+		return this.money;
+	}
+	
+	this.toPay = function (m) {
+		if (this.money - m >= 0) this.money-=m; 
+			else return false;
+			
+		return this.money;
+	}
+}
